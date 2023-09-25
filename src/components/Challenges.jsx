@@ -40,9 +40,14 @@ export default function Challenges() {
         onSelectType={handleSelectType}
         selectedType={selectedType}
       >
-        <AnimatePresence>
+        <AnimatePresence mode='wait'>
         {displayedChallenges.length > 0 && (
-          <motion.ol exit={{ y: -30, opacity: 0 }} className="challenge-items">
+          <motion.ol 
+            key='list'
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ y: -30, opacity: 0 }} 
+            className="challenge-items">
             <AnimatePresence>
               {displayedChallenges.map((challenge) => (
                 <ChallengeItem
@@ -56,7 +61,7 @@ export default function Challenges() {
           </motion.ol>
         )}
         </AnimatePresence>
-        {displayedChallenges.length === 0 && <p>No challenges found.</p>}
+        {displayedChallenges.length === 0 && <p key='fallback'>No challenges found.</p>}
       </ChallengeTabs>
     </div>
   );
